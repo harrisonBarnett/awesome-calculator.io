@@ -6,45 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>awesome calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" ></script>
 </head>
 <body>    
     <h1 class="title">The World Famous Awesome Calculator</h1>
 
     <div class="calc-body">
-        <div class="calc-screen"></div>
+        <div class="calc-screen">
+            <div class="display">hello</div>
+        </div>
         <div class="row-1">
-            <button id="clear">C</button>
-            <button id="modulo">%</button>
-            <button id="division">/</button>
+            <button class="operator" id="clear" value="clear">C</button>
+            <button class="operator" id="modulo" value="%">%</button>
+            <button class="operator" id="division" value="/">/</button>
         </div>
 
         <div class="row-2">
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
-            <button id="addition">+</button>
+            <button class="number" id="seven" value="7">7</button>
+            <button class="number" id="eight" value="8">8</button>
+            <button class="number" id="nine" value="9">9</button>
+            <button class="operator id="addition" value="+">+</button>
         </div>
         
         <div class="row-3">
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
-            <button id="subtraction">-</button>
+            <button class="number" id="four" value="4">4</button>
+            <button class="number" id="five" value="5">5</button>
+            <button class="number" id="six"value="6">6</button>
+            <button class="operator" id="subtraction" value="-">-</button>
         </div>
 
         <div class="row-4">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="multiplication">x</button>
+            <button class="number" id="one" value="1">1</button>
+            <button class="number" id="two" value="2">2</button>
+            <button class="number" id="three" value="3">3</button>
+            <button class="operator" id="multiplication" value="*">x</button>
         </div>
 
         <div class="row-5">
-            <button id="decimal">.</button>
-            <button id="zero">0</button>
-            <button id="equals">=</button>
+            <button class="number" id="decimal" value=".">.</button>
+            <button class="number" id="zero" value="0">0</button>
+            <button class="operator" id="equals" value="equals">=</button>
         </div>
     </div>
+    <script src="script.js" ></script>
 </body>
 </html>

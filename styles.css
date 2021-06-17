@@ -25,6 +25,9 @@ body {
     grid-area: screen;
     background: pink;
     margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .row-1 {
     grid-area: one;
@@ -50,7 +53,7 @@ body {
     display: flex;
     justify-content: space-evenly;
 }
-
+/* =========== DA BUTTON ZONE ============ */
 button {
     height: 70px;
     width: 70px;
