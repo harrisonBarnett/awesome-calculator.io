@@ -5,79 +5,65 @@ body {
 
 .calc-body {
     background: gray;
-    width: 18em;
-    height: 25em;
+    width: 350px;
+    height: 500px;
     display: grid;
     grid-template-columns:
-        1fr 1fr 1fr 1fr;
+        auto;
     grid-template-rows:
         1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
         "screen screen screen screen"
-        "clear clear mod div"
-        "seven eight nine plus"
-        "four five six minus"
-        "one two three times"
-        "dec zero eq eq";
+        "one one one one"
+        "two two two two"
+        "three three three three"
+        "four four four four"
+        "five five five five";
 }
 .calc-screen {
+    grid-area: screen;
     background: pink;
-    grid-area: screen;
 }
-.calc-screen {
-    grid-area: screen;
-}
-#clear {
-    grid-area: clear;
-}
-#modulo {
-    grid-area: mod;
-}
-#division {
-    grid-area: div;
-}
-#seven {
-    grid-area: seven;
-}
-#eight {
-    grid-area: eight;
-}
-#nine {
-    grid-area nine;
-}
-#addition {
-    grid-area: plus;
-}
-#four {
-    grid-area: four;
-}
-#five {
-    grid-area: five;
-}
-#six {
-    grid-area: six;
-}
-#subtraction {
-    grid-area: minus;
-}
-#one {
+.row-1 {
     grid-area: one;
 }
-#two {
+.row-2 {
     grid-area: two;
 }
-#three {
+.row-3 {
     grid-area: three;
 }
-#multiplication {
-    grid-area: times;
+.row-4 {
+    grid-area: four;
 }
-#decimal {
-    grid-area: dec;
+.row-5 {
+    grid-area: five;
 }
-#zero {
-    grid-area: zero;
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5 {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+button {
+    height: 70px;
+    width: 70px;
+    border: none;
+    border-radius: 50%;
+
+    box-shadow: 3px 3px rgba(0, 0, 0, .9);
+}
+#clear,
 #equals {
-    grid-area: eq;
+    width: 150px;
+    border-radius: 70px;
+}
+button:hover {
+    transform: scale(.95);
+
+    box-shadow: none;
 }
