@@ -14,12 +14,12 @@ body {
     grid-template-rows:
         1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
-        "screen screen screen screen"
-        "one one one one"
-        "two two two two"
-        "three three three three"
-        "four four four four"
-        "five five five five";
+        "screen"
+        "one"
+        "two"
+        "three"
+        "four"
+        "five";
 }
 .calc-screen {
     position: relative;
@@ -42,7 +42,6 @@ body {
     font-weight: 800;
 
 }
-.display
 .row-1 {
     grid-area: one;
 }
