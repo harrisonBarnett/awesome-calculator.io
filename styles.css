@@ -22,13 +22,27 @@ body {
         "five five five five";
 }
 .calc-screen {
+    position: relative;
     grid-area: screen;
     background: pink;
     margin-bottom: 1em;
+}
+.display {
+    position: absolute;
+    top: 25%;
+
+    height: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    background: darkgreen;
+    color: lime;
+    font-weight: 800;
+
 }
+.display
 .row-1 {
     grid-area: one;
 }
