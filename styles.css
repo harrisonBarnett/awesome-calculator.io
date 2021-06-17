@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.calc-body {
+    background: gray;
+    width: 18em;
+    height: 25em;
+    display: grid;
+    grid-template-columns:
+        1fr 1fr 1fr 1fr;
+    grid-template-rows:
+        1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "screen screen screen screen"
+        "clear clear mod div"
+        "seven eight nine plus"
+        "four five six minus"
+        "one two three times"
+        "dec zero eq eq";
+}
+.calc-screen {
+    background: pink;
+    grid-area: screen;
+}
+.calc-screen {
+    grid-area: screen;
+}
+#clear {
+    grid-area: clear;
+}
+#modulo {
+    grid-area: mod;
+}
+#division {
+    grid-area: div;
+}
+#seven {
+    grid-area: seven;
+}
+#eight {
+    grid-area: eight;
+}
+#nine {
+    grid-area nine;
+}
+#addition {
+    grid-area: plus;
+}
+#four {
+    grid-area: four;
+}
+#five {
+    grid-area: five;
+}
+#six {
+    grid-area: six;
+}
+#subtraction {
+    grid-area: minus;
+}
+#one {
+    grid-area: one;
+}
+#two {
+    grid-area: two;
+}
+#three {
+    grid-area: three;
+}
+#multiplication {
+    grid-area: times;
+}
+#decimal {
+    grid-area: dec;
+}
+#zero {
+    grid-area: zero;
+}
+#equals {
+    grid-area: eq;
+}
