@@ -4,15 +4,21 @@ body {
     font-family: monospace;
 }
 
+.title {
+    margin-left: 5vw;
+    font-weight: 900;
+}
+
 .calc-body {
-    background: gray;
+    background: hsl(332, 35%, 56%);
     width: 350px;
-    height: 500px;
+    height: 600px;
+    margin: 0 5vw;
     display: grid;
     grid-template-columns:
         auto;
     grid-template-rows:
-        1fr 1fr 1fr 1fr 1fr 1fr;
+        2fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
         "screen"
         "one"
@@ -20,27 +26,40 @@ body {
         "three"
         "four"
         "five";
+
+    border-radius: 45px;
+    border: 8px solid hsl(332, 35%, 75%);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, .3);
 }
 .calc-screen {
-    position: relative;
     grid-area: screen;
-    background: pink;
-    margin-bottom: 1em;
+}
+.display-container {
+    height: 50%;
+    width: 80%;
+    margin: 3em auto;
+    padding: 0;
+    
+    background: hsl(208, 25%, 58%);
+    border: 8px solid hsl(332, 35%, 75%);
+    border-radius: 15px;
+    display: flex;
+    justify-content: flex-end;
+
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+
 }
 .display {
-    position: absolute;
-    top: 25%;
-
     height: 50%;
-    width: 100%;
+    width: 80%;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
-    background: darkgreen;
-    color: lime;
+    color: hsl(154, 100%, 88%);
     font-weight: 800;
-
+    font-size: 2em;
 }
 .row-1 {
     grid-area: one;
@@ -70,10 +89,15 @@ body {
 button {
     height: 70px;
     width: 70px;
-    border: none;
     border-radius: 50%;
+    background: hsl(355, 88%, 70%);
 
-    box-shadow: 2px 2px rgba(25, 25, 25, .75);
+    box-shadow: 3px 2px hsl(267, 25%, 50%);
+    border: 3px solid white;
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 1.6em;
+    color: hsl(267, 25%, 40%);
 }
 #clear,
 #equals {
@@ -82,6 +106,5 @@ button {
 }
 button:hover {
     transform: scale(.95);
-
     box-shadow: none;
 }

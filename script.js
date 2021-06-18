@@ -9,8 +9,10 @@ function updateDisplay(a) {
 // number button event listener
 document.addEventListener('click', function(e) { // bubble method
     if(e.target.className == 'number') {
+        if(display.length < 14) { // limit to 14 digits
         display += e.target.value;
         updateDisplay(display);
+        }
     }
 });
 
@@ -47,19 +49,43 @@ function doMath(a, b, op) {
     var solution = "";
     switch(op) {
         case '+':
-            solution = String(add(parseInt(a), parseInt(b)));
+            solution = add(parseFloat(a), parseFloat(b));
             break;
+        case '-':
+            solution = subtract(parseFloat(a), parseFloat(b));
+            break;
+        case '*':
+            solution = multiply(parseFloat(a), parseFloat(b));
+            break;
+        case '/':
+            solution = divide(parseFloat(a), parseFloat(b));
+            break;
+        case '%':
+            solution = modulo(parseFloat(a), parseFloat(b));
+            break;    
     }
-    return String(solution);
+    return solution;
 }
 
 // performing the operation 
 document.getElementById('equals').addEventListener('click', function() {
     operandAfter = display;
+    if(operandAfter == "0") {
+        updateDisplay("LOL NICE TRY ;)");
+        setTimeout(function() {
+            display = "";
+            updateDisplay(display);
+        }, 1500);
+    } else {
     var solution = doMath(operandBefore, operandAfter, operator);
-    console.log(solution);
-    display = solution;
+    // console.log(solution);
+    if(String(solution).length >= 15) {
+    display = solution.toFixed(12); // limit to 12 dec pts
+    } else {
+        display = solution;
+    }
     updateDisplay(display);
+    }
 });
 
 // operations
