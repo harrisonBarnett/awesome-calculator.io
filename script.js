@@ -1,5 +1,5 @@
 // getting the innertext of the display
-var display = String(document.getElementById('display').innerText);
+let display = String(document.getElementById('display').innerText);
 
 // update display value
 function updateDisplay(a) {
@@ -16,13 +16,14 @@ document.addEventListener('click', function(e) { // bubble method
 
 // clearing the screen on button press
 document.getElementById('clear').addEventListener('click', event => {
-    updateDisplay("");
+    display = "";
+    updateDisplay(display);
 });
 
 
-var operandBefore = "";
-var operator = "";
-var operandAfter = "";
+let operandBefore = "";
+let operator = "";
+let operandAfter = "";
 
 // clear all
 function clear() {
@@ -37,28 +38,29 @@ document.addEventListener('click', function(e) { // bubble method
         operandBefore = display;
         operator = e.target.value;
         display = ""; // clear between button presses
-        // document.getElementById('display').innerText = "";
-        updateDisplay("");
-    
+        updateDisplay(display);
     }
 });
 
+// switch case to perform whatever math operation
+function doMath(a, b, op) {
+    var solution = "";
+    switch(op) {
+        case '+':
+            solution = String(add(parseInt(a), parseInt(b)));
+            break;
+    }
+    return String(solution);
+}
 
 // performing the operation 
 document.getElementById('equals').addEventListener('click', function() {
     operandAfter = display;
-    let solution = "";
-    switch(operator) {
-        case '+':
-            solution = String(add(parseInt(operandBefore), parseInt(operandAfter)));
-            break;
-    }
-    // display = solution;
-    updateDisplay(solution);
+    var solution = doMath(operandBefore, operandAfter, operator);
     console.log(solution);
-    clear();
+    display = solution;
+    updateDisplay(display);
 });
-
 
 // operations
 function add(a, b) {
