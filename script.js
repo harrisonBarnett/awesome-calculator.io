@@ -1,19 +1,22 @@
 // getting the innertext of the display
-// this method returns display as an array, hence [0]
 var display = String(document.getElementById('display').innerText);
+
+// update display value
+function updateDisplay(a) {
+    document.getElementById('display').innerText = String(a);
+}
 
 // number button event listener
 document.addEventListener('click', function(e) { // bubble method
     if(e.target.className == 'number') {
         display += e.target.value;
-        document.getElementById('display').innerText = display;
+        updateDisplay(display);
     }
 });
 
 // clearing the screen on button press
 document.getElementById('clear').addEventListener('click', event => {
-    display = "";
-    document.getElementById('display').innerText = "";
+    updateDisplay("");
 });
 
 
@@ -21,35 +24,39 @@ var operandBefore = "";
 var operator = "";
 var operandAfter = "";
 
-// operator button event listener
-document.addEventListener('click', function(e) { // bubble method
-    if(e.target.className == 'operator') {
-        operandBefore = display;
-        operator = e.target.value;
-        display = ""; // clear between button presses
-        document.getElementById('display').innerText = "";
-    
-    }
-});
-
-// clear cache
+// clear all
 function clear() {
     operandBefore = "";
     operator = "";
     operandAfter = "";
 }
 
+// operator button event listener
+document.addEventListener('click', function(e) { // bubble method
+    if(e.target.className == 'operator') {
+        operandBefore = display;
+        operator = e.target.value;
+        display = ""; // clear between button presses
+        // document.getElementById('display').innerText = "";
+        updateDisplay("");
+    
+    }
+});
+
+
 // performing the operation 
 document.getElementById('equals').addEventListener('click', function() {
     operandAfter = display;
-    solution = "";
+    let solution = "";
     switch(operator) {
         case '+':
             solution = String(add(parseInt(operandBefore), parseInt(operandAfter)));
             break;
     }
+    // display = solution;
+    updateDisplay(solution);
     console.log(solution);
-    display = solution;
+    clear();
 });
 
 
