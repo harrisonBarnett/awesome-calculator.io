@@ -7,9 +7,7 @@ function updateDisplay(a) {
 // global variables
 let displayReturn = "";
 let operandBefore = "";
-let operator1 = "";
-let operator2 = "";
-let operandAfter = "";
+let operator = "";
 let solution = "";
 
 // clear all operation things
@@ -19,51 +17,51 @@ function clear() {
     displayReturn = "";
 }
 
+// get numbers from pressed button
+// and concat to display
 document.addEventListener('click', function(e) {
     if(e.target.className == 'number') { // bubbling up
-        if(displayReturn.length < 14) {
+        if(displayReturn.length < 14) { // preventing overflow on screen
             displayReturn += e.target.value;
         }
         updateDisplay(displayReturn);
     }
-    // console.log(operandBefore);
-    // console.log(operator);
-    // console.log(operandAfter);
 });
 
 document.addEventListener('click', function(e) {
         if(e.target.className == 'operator') {
+            // performed after clear()s or on the first pass
             if (!operandBefore) { 
                 if (!solution) { 
-                    operator1 = e.target.value;
+                    operator = e.target.value;
                     operandBefore = displayReturn;
                     updateDisplay("");
                     displayReturn = "";
                 } else {
+                    // performed on the first pass
                     if(!displayReturn) {
                         operandBefore = solution;
-                        operator1 = e.target.value;
+                        operator = e.target.value;
+                    // performed after clear()s
                     } else {
                         operandBefore = solution;
                         operandAfter = displayReturn;
-                        solution = String(doMath(operandBefore, operandAfter, operator1));
+                        solution = String(doMath(operandBefore, operandAfter, operator));
                         updateDisplay(solution);
-                        displayReturn = "";
                         clear();
-                        operator1 = e.target.value;
+                        operator = e.target.value;
                     }
                 }
+            // performed on operation strings
             } else {
                 operandAfter = displayReturn;
-                solution = String(doMath(operandBefore, operandAfter, operator1));
+                solution = String(doMath(operandBefore, operandAfter, operator));
                 updateDisplay(solution);
-                displayReturn = "";
                 clear();
-                operator1 = e.target.value; 
+                operator = e.target.value; 
             }
         }
 });
-
 
 // switch case to perform whatever math operation
 function doMath(a, b, op) {
@@ -90,6 +88,7 @@ function doMath(a, b, op) {
             toReturn = modulo(parseFloat(a), parseFloat(b));
             break;    
     }
+    // preventing overflow on the calculator screen
     if(String(toReturn).length >= 15) {
         toReturn = toReturn.toFixed(12);
     }
@@ -99,29 +98,28 @@ function doMath(a, b, op) {
 // clearing the screen on button press
 document.getElementById('clear').addEventListener('click', event => {
     clear();
+    operator = "";
     solution = "";
     updateDisplay("");
 });
 
 // equals event
 document.getElementById('equals').addEventListener('click', event => {
+    // performed on first pass
     if(!solution) {
         operandAfter = displayReturn;
-        solution = String(doMath(operandBefore, operandAfter, operator1));
+        solution = String(doMath(operandBefore, operandAfter, operator));
         updateDisplay(solution);
-        displayReturn = "";
         clear();
+    // peformed after operation strings
     } else {
         operandBefore = solution;
         operandAfter = displayReturn;
-        solution = String(doMath(operandBefore, operandAfter, operator1));
+        solution = String(doMath(operandBefore, operandAfter, operator));
         updateDisplay(solution);
-        displayReturn = "";
         clear();
     }
 });
-
-
 
 // math operations
 function add(a, b) {
