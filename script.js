@@ -1,94 +1,129 @@
-// getting the innertext of the display
-let display = String(document.getElementById('display').innerText);
 
 // update display value
 function updateDisplay(a) {
     document.getElementById('display').innerText = String(a);
 }
 
-// number button event listener
-document.addEventListener('click', function(e) { // bubble method
-    if(e.target.className == 'number') {
-        if(display.length < 14) { // limit to 14 digits
-        display += e.target.value;
-        updateDisplay(display);
-        }
-    }
-});
-
-// clearing the screen on button press
-document.getElementById('clear').addEventListener('click', event => {
-    display = "";
-    updateDisplay(display);
-});
-
-
+// global variables
+let displayReturn = "";
 let operandBefore = "";
-let operator = "";
+let operator1 = "";
+let operator2 = "";
 let operandAfter = "";
+let solution = "";
 
-// clear all
+// clear all operation things
 function clear() {
     operandBefore = "";
-    operator = "";
     operandAfter = "";
+    displayReturn = "";
 }
 
-// operator button event listener
-document.addEventListener('click', function(e) { // bubble method
-    if(e.target.className == 'operator') {
-        operandBefore = display;
-        operator = e.target.value;
-        display = ""; // clear between button presses
-        updateDisplay(display);
+document.addEventListener('click', function(e) {
+    if(e.target.className == 'number') { // bubbling up
+        if(displayReturn.length < 14) {
+            displayReturn += e.target.value;
+        }
+        updateDisplay(displayReturn);
     }
+    // console.log(operandBefore);
+    // console.log(operator);
+    // console.log(operandAfter);
 });
+
+document.addEventListener('click', function(e) {
+        if(e.target.className == 'operator') {
+            if (!operandBefore) { 
+                if (!solution) { 
+                    operator1 = e.target.value;
+                    operandBefore = displayReturn;
+                    updateDisplay("");
+                    displayReturn = "";
+                } else {
+                    if(!displayReturn) {
+                        operandBefore = solution;
+                        operator1 = e.target.value;
+                    } else {
+                        operandBefore = solution;
+                        operandAfter = displayReturn;
+                        solution = String(doMath(operandBefore, operandAfter, operator1));
+                        updateDisplay(solution);
+                        displayReturn = "";
+                        clear();
+                        operator1 = e.target.value;
+                    }
+                }
+            } else {
+                operandAfter = displayReturn;
+                solution = String(doMath(operandBefore, operandAfter, operator1));
+                updateDisplay(solution);
+                displayReturn = "";
+                clear();
+                operator1 = e.target.value; 
+            }
+        }
+});
+
 
 // switch case to perform whatever math operation
 function doMath(a, b, op) {
-    var solution = "";
+    toReturn = "";
     switch(op) {
         case '+':
-            solution = add(parseFloat(a), parseFloat(b));
+            toReturn = add(parseFloat(a), parseFloat(b));
             break;
         case '-':
-            solution = subtract(parseFloat(a), parseFloat(b));
+            toReturn = subtract(parseFloat(a), parseFloat(b));
             break;
         case '*':
-            solution = multiply(parseFloat(a), parseFloat(b));
+            toReturn = multiply(parseFloat(a), parseFloat(b));
             break;
         case '/':
-            solution = divide(parseFloat(a), parseFloat(b));
-            break;
+            if(b==0) {
+                toReturn = "LOL NICE TRY";
+                break;
+            } else {
+                toReturn = divide(parseFloat(a), parseFloat(b));
+                break;
+            }
         case '%':
-            solution = modulo(parseFloat(a), parseFloat(b));
+            toReturn = modulo(parseFloat(a), parseFloat(b));
             break;    
     }
-    return solution;
+    if(String(toReturn).length >= 15) {
+        toReturn = toReturn.toFixed(12);
+    }
+    return toReturn;
 }
 
-// performing the operation 
-document.getElementById('equals').addEventListener('click', function() {
-    operandAfter = display;
-    if(operandAfter == "0") {
-        updateDisplay("LOL NICE TRY ;)");
-        setTimeout(function() {
-            display = "";
-            updateDisplay(display);
-        }, 1500);
+// clearing the screen on button press
+document.getElementById('clear').addEventListener('click', event => {
+    clear();
+    solution = "";
+    updateDisplay("");
+});
+
+// equals event
+document.getElementById('equals').addEventListener('click', event => {
+    if(!solution) {
+        operandAfter = displayReturn;
+        solution = String(doMath(operandBefore, operandAfter, operator1));
+        updateDisplay(solution);
+        displayReturn = "";
+        clear();
     } else {
-    var solution = doMath(operandBefore, operandAfter, operator);
-    // console.log(solution);
-    if(String(solution).length >= 15) {
-    display = solution.toFixed(12); // limit to 12 dec pts
-    } else {
-        display = solution;
-    }
-    updateDisplay(display);
+        operandBefore = solution;
+        operandAfter = displayReturn;
+        solution = String(doMath(operandBefore, operandAfter, operator1));
+        updateDisplay(solution);
+        displayReturn = "";
+        clear();
     }
 });
 
-// operations
+
+
+// math operations
 function add(a, b) {
     return a + b;
 }
@@ -104,4 +139,3 @@ function divide(a, b) {
 function modulo(a, b) {
     return a % b;
 }
-
